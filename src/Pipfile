@@ -1,0 +1,27 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pylint = "*"
+
+[packages]
+django = "*"
+pillow = "*"
+django-crispy-forms = "*"
+psycopg2-binary = "*"
+boto3 = "*"
+django-storages = "*"
+python-decouple = "*"
+django-decouple = "*"
+django-filter = "*"
+django-bootstrap-form = "*"
+django-filters = "*"
+django-widget-tweaks = "*"
+django-pagination = "*"
+stripe = "*"
+gunicorn = "*"
+
+[requires]
+python_version = "3.7"

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Friends List{% endblock %}
+
+{% block content %}
+
+    <div id="search_jumbo">
+
+        <div class="row align-items-center">
+        <div class="col-12">
+    
+            <h4 class="display-4 search_brand">{{ users_list.username }}'s Friends</h4>
+        </div>
+        </div>
+    </div>
+
+    <div class="container shadow-lg animation_in">
+        <br><br><br>
+
+        <!-- Figure out how to iterate over everything -->
+        {% for friend in friends %}
+            <div class="text-center">
+                <a href="{% url 'profile' friend.to_user.id %}">
+                    <button id="small_search_result" class="btn btn-outline-dark shadow mb-1">
+                        <div class="row">
+                            <div class="col-3 text-left">
+                                <img id="search_img" src="{{ friend.to_user.user.profile_picture.url }}" alt="">
+                            </div>
+                            <div class="col-9 text-right pt-2">
+                                <span id="small_search">{{ friend.to_user.username }} | {{ friend.to_user.user.location }} | {{ friend.to_user.user.profession }} | Followers: {{ friend.to_user.user.follower_amount }}</span>
+                            </div>
+                        </div>
+                    </button>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+

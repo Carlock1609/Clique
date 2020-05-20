@@ -1,0 +1,143 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div id="homepage_caption">
+  <br><br>
+  <!-- ADD JUMBTRON HERE AND HAVE THE CLIQUE CAPTION AND THEN THE ABOUT BELOW ALL IN THE GREY -->
+  <div class="row">
+    <div class="col-3">
+      <div class="mt-5 mb-5 pl-5">
+        <h4 class="display-4">CREATE</h4>
+        <h4 class="display-4">CONNECT</h4>
+        <h4 class="display-4 title_brand">CLIQUE</h4>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="text-center" id="title_text">
+        <blockquote class="blockquote">
+          <h4 class="mb-0">You miss 100% of the shots you Don't take.</h4>
+          <footer class="blockquote-footer ml-5">Michael Scott</footer>
+        </blockquote>
+
+        <!-- <h4>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam ab, sapiente, voluptas commodi obcaecati odit consectetur aliquam suscipit nobis error, </h4> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container animation_in">
+  {% if user.is_authenticated %}
+    <br>
+
+    <div class="container shadow-lg mt-5">
+
+      <div class="row text-center mt-5">
+        <div class="col-12">
+            <p id="home_p">
+              Clique is a place for Photographers looking to build their portfolio's and Social Media Influencers looking for a Photographer. 
+            </p>
+        </div>
+      </div>
+  
+      <div class="row text-center mt-5" id="home_transitions">
+        <div class="col-5 col-sm-12 order-1">
+          <p id="home_p">
+            Use the SEARCH to connect with Other Users
+          </p>
+        </div>
+        <div class="col-2 col-sm-12 order-2">
+          <p id="home_p">
+            - OR -
+          </p>
+        </div>
+        <div class="col-5 col-sm-12 order-3 mb-4">
+          <p id="home_p">
+            Explore the Photos below to find Users
+          </p>
+        </div>
+      </div>
+    </div>
+    <hr>
+
+    <!-- THIS NEEDS TO BE TWEAKED. NEED MORE DUMMY DATA -->
+    <!-- FIGURE OUT HOW TO JUST WRAP THIS INSTEAD OF TWO ROWS -->
+    <h4>This Weeks TOP Users</h4>
+    <div class="container-fluid shadow-lg" id="rank_container">
+      <div class="row mt-2">
+    
+        
+        {% for user in user_ranks5 %}
+          <div class="col-lg-6 col-md-12 col-sm-12">
+              <a href="{% url 'profile' user.user.id %}">
+                  <button id="small_rank_btn" class="btn btn-outline-dark shadow-lg mb-1">
+                      <div class="row">
+                          <div class="col-1 text-left">
+                              <img id="small_rank_img" src="{{ user.profile_picture.url }}" alt="">
+                          </div>
+                          <div class="col-11 text-left">
+                            <p id="small_rank_p">
+                              {{ user.user }} | {{ user.location }} | {{ user.profession }} | Followers: {{ user.follower_amount }}
+                            </p>
+                          </div>
+                      </div>
+                  </button>
+              </a>
+            </div>
+          {% endfor %}
+          
+          {% for user in user_ranks10 %}
+          <div class="col-lg-6 col-md-12 col-sm-12">
+              <a href="{% url 'profile' user.user.id %}">
+                  <button id="small_rank_btn" class="btn btn-outline-dark shadow-lg mb-1">
+                      <div class="row">
+                          <div class="col-1 text-left">
+                              <img id="small_rank_img" src="{{ user.profile_picture.url }}" alt="">
+                          </div>
+                          <div class="col-11 text-left">
+                            <p id="small_rank_p">
+                              {{ user.user }} | {{ user.location }} | {{ user.profession }} | Followers: {{ user.follower_amount }}
+                            </p>
+                          </div>
+                      </div>
+                  </button>
+              </a>
+            </div>
+          {% endfor %}
+
+      </div>
+    </div>
+
+    <hr>
+    <br>
+    <div class="text-center">
+      <h4><span id="gallery_caption">EXPLORE PHOTO GALLERY</span></h4>
+      <br><br>
+
+    </div>
+    <div class="container shadow-lg" id="picture_container">
+      <div class="row mt-4 mr-0 ">
+        {% for image in images %}
+          <div class="col-lg-2 col-md-4 col-sm-6 col-6 text-center">
+              <div id="crop_photo_home" class="zoom">
+                <a href="{% url 'profile' image.user.id %}"><img class="user-img home_photos" src="{{ image.file.url }}" alt=""></a> 
+              </div>
+              <!-- <hr id="homepage_hr"> -->
+              <br>
+              
+          </div>
+        {% endfor %}
+      </div>
+
+    </div>
+    <br><br><br>
+
+  {% endif %}
+
+</div>
+
+{% endblock %}
+
+

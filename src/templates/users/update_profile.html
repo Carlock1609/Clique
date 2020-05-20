@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Update Profile{% endblock %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+
+    <div id="search_jumbo">
+
+        <div class="row align-items-center">
+        <div class="col-12">
+    
+            <h4 class="display-4 search_brand">Updating {{ user.username }}</h4>
+        </div>
+        </div>
+    </div>
+
+    <div class="container animation_in">
+        <div class="container shadow-lg mt-5 pb-5">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4"></legend>
+                    {{ p_form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-dark" type="submit">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock %}

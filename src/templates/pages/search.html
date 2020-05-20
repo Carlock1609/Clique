@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block title %}Search{% endblock %}
+
+{% block content %}
+
+<div id="search_jumbo">
+   <div class="row align-items-center">
+      <div class="col-12">
+
+         <h4 class="display-4 search_brand">SEARCH</h4>
+      </div>
+   </div>
+</div>
+
+ <div class="container animation_in">
+
+   <!-- <div class="container"> -->
+      <div class="container shadow-lg mt-5 text-center" id="search_container">
+         <br><br>
+         <b><h2>Search for Users</h2></b>
+         <hr>
+         
+         <div class="row ml-5">
+            <div class="col-lg-6 col-md-12 col-sm-12">
+               <div class="text-left">
+                  <ul><h3>Lookup Users by:</h3>
+                     <h4>
+                        <li class="ml-5">First Name</li>
+                        <li class="ml-5">Username</li>
+                        <li class="ml-5">Location</li>
+                     </h4>
+                  </ul>
+               </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+               <div class="text-left">
+                  <ul><h3>Filter users by:</h3>
+                     <h4>
+                        <li class="ml-5">Follower Amount</li>
+                        <li class="ml-5">Photographer | Influencer</li>
+                     </h4>
+                  </ul>
+               </div>
+            </div>
+         </div>
+
+         
+         <div id="search_caption">
+            <div class="row">
+               <form action="{% url 'search' %}" method="POST" id="searchbar_form">
+                  {% csrf_token %}
+                  <div class="col-lg-10" id="searchbar_container">
+                     <input id="search_bar" type="text" placeholder="Search here..." name="q">
+                     
+                  <div class="col-lg-2">
+
+                     <div class="row">
+                        <div class="col-lg-12" id="search_form_drop">
+                           <div class="form-group ml-0">
+                              <select class="form-control dropdown_search" id="dropdownMenuButton" name="follower_amount">
+                                 <!-- give each filter a value -->
+                                 <option value="0">Any</option>
+                                 <option value="100">0 to 100</option>
+                                 <option value="1000">100 to 1000</option>
+                                 <option value="5000">1000 to 5000</option>
+                                 <option value="10000">5000 to 10000</option>
+                                 <option value="50000">10000 to 50000</option>
+                                 <option value="100000">50000 to 100000</option>
+                              </select>
+                           </div>
+                        </div>
+                           <div class="col-lg-12" id="search_form_drop">
+                              <div class="form-group ml-0">
+                                 <select class="form-control dropdown_search" id="dropdownMenuButton" name="profession">
+                                    <!-- Figure out how to do any value -->
+                                    <option value="Photographer">Photographer</option>
+                                    <option value="Influencer">Influencer</option>
+                                 </select>
+                              </div>
+                           </div>
+                        </div>
+         
+                  </div>
+               </div>
+                  <div class="row">
+                     <div class="col text-center">
+                        <br>
+                        <button type="submit" value="Search" id="search_btn" class="btn btn-outline-dark mt-2">Search</button>
+                     </div>
+                  </div>
+               </form>
+            </div>
+            <br><br>
+            {% for profile in results %}
+               <a href="{% url 'profile' profile.user.id %}">
+                  <!-- <button id="msg_list" class="btn btn-outline-dark">
+                        <img id="small_img" src="{{ profile.profile_picture.url }}" alt="">
+                        <span id="small_search">{{ profile.user.username }} | {{ profile.location }} | Follower Amount: {{ profile.follower_amount }}</span>
+                  </button> -->
+                  <button id="small_search_result" class="btn btn-outline-dark shadow mb-1">
+                     <div class="row">
+                         <div class="col-3 text-left">
+                             <img id="search_img" src="{{ profile.profile_picture.url }}" alt="">
+                         </div>
+                         <div class="col-9 text-right pt-2">
+                             <span id="small_search">{{ profile.user.username }} | {{ profile.location }} | {{ profile.profession }} | Followers: {{ profile.follower_amount }}</span>
+                         </div>
+                     </div>
+                  </button>
+               </a>
+            {% endfor %}
+      </div>
+   <!-- </div> -->
+
+{% endblock %}
+
+<!-- <img id="profile_photos" class="user-img" src="{{ image.file.url }}" alt=""> -->
+   

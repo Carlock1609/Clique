@@ -1,0 +1,117 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Bowlby+One+SC&display=swap" rel="stylesheet">  -->
+    <script src="https://kit.fontawesome.com/d2fa6f82cb.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Bowlby+One+SC|Roboto+Slab|Sriracha&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nav_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+
+    <title>CLIQUE - {% block title %}{% endblock %}</title>
+  </head>
+  <body>
+
+    <!-- welcome page -->
+    <!-- {% if user.is_authenticated == False %} -->
+     
+    <!-- {% endif %} -->
+      
+    <!-- top navbar -->
+<div class="container-fluid">
+
+  <nav class="navbar navbar-dark navbar-expand-sm fixed-top active">
+    <div class="row">
+      <div class="col-2">
+        <div class="d-lg-none d-md-none d-sm-none">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+      <div class="col-2 d-lg-none d-md-none d-sm-none" id="clique_collapse">
+        <a class="navbar-brand mx-auto col-lg" id="center-nav" href="{% url 'home' %}">CLIQUE<span class="sr-only">(current)</span></a>
+      </div>
+    </div>
+
+      <!-- Think about just doing one IF statement with an else. BUT this may be easier to read, because you would then see two of li's on the code -->
+      <div class="collapse navbar-collapse order-1 order-md-0" id="navbarSupportedContent">
+        {% if user.is_authenticated %}
+        <a class="nav-link" href="{% url 'friends_list' user.id %}"><i class="fas fa-users" id="friends_logo"></i> </a> 
+                <span>{{ user.username }}</span>
+        {% endif %}
+        <ul class="navbar-nav mx-auto">
+          {% if user.is_authenticated %}
+            <li class="nav-item active">
+              <a method="GET" class="nav-link" href="{% url 'profile' user.id %}">Profile </a>
+            </li>
+            <li class="nav-item active">
+              <a method="GET" class="nav-link" href="{% url 'user-inbox' user.id %}">Inbox </a>
+            </li>
+            <li class="ml-3 mr-3">
+              <a class="navbar-brand mx-auto" id="center-nav" href="{% url 'home' %}">CLIQUE <span class="sr-only">(current)</span></a>
+              <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button> -->
+            </li>
+            <li >
+              <a class="nav-link active" href="{% url 'search' %}">Search </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'logout' %}">Logout </a>
+            </li>
+          {% else %}
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'login' %}">Login </a>
+            </li>
+            <li class="ml-3 mr-3">
+              <a class="navbar-brand mx-auto" id="center-nav" href="{% url 'home' %}"> <!-- <i class="fas fa-camera-retro"></i> --> CLIQUE <span class="sr-only">(current)</span></a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'about' %}">About </a>
+            </li>
+          {% endif %}
+        </ul>
+        {% if user.is_authenticated %}
+        <!-- This will be link to friends/"cliques" -->
+          <a class="nav-link active" href="{% url 'donate' %}">Donate</a>
+        {% else %}
+        {% endif %}
+
+        <!-- FIGUREOUT A GOOD SPOT TO PUT THIS -->
+        <!-- <form class="form-inline my-2 my-lg-0"> -->
+          <!-- Add filter setting -->
+          <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Filter</button>
+        </form> -->
+      </div>
+    </nav>
+</div>
+<!-- content -->
+{% block content %}
+{% endblock %}
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+    
+
+  </body>
+</html>
