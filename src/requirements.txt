@@ -40,5 +40,5 @@ sorl-thumbnail==12.6.2
 sqlparse==0.3.0
 stripe==2.42.0
 typed-ast==1.4.0
-urllib3==1.25.8
+urllib3==1.26.5
 wrapt==1.11.2
